@@ -15,12 +15,9 @@ TicTacToe.prototype = {
     $('.play').hide();
   },
   play: function(player, button) {
-    console.log(player);
-    var selected_button = button.data('cell');
-    var sym;
-    player.id === 1 ? sym = '🌶' : sym = '🍹';
-    button.text(sym);
-    console.log(button);
+    if (button.text() !== '') {return}
+    button.text(player.symbol);
+
     if (player.id === 1) {
       this.turn = this.player_two;
     } else {
