@@ -27,5 +27,15 @@ TicTacToe.prototype = {
 }
 
 $(document).on('ready', function() {
-
+  console.log('Welcome to Tic-Tac-Toe!');
+  var ttt = new TicTacToe();
+  $('.play').on('click', function(event) {
+    ttt.show();
+  })
+  $('.grid').on('click', function(event) {
+    event.preventDefault();
+    var button = $(this);
+    ttt.play(ttt.turn, button);
+  })
 })
+    
