@@ -77,8 +77,7 @@ TicTacToe.prototype = {
     }
 
     return false;
-  }, 
-
+  }
 }
 
 function inc_or_create_key(obj, key) {
