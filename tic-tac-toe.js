@@ -3,7 +3,6 @@ function Player(id, sym) {
   this.symbol = sym;
   this.numbers = {};
   this.letters = {};
-  this.center_sq = false;
   this.corners = [];
 }
 
@@ -15,11 +14,6 @@ function TicTacToe() {
 }
 
 TicTacToe.prototype = {
-  // show: function() {
-  //   $("#tic-tac-toe").show();
-  //   $('.play').hide();
-  // },
-
   play: function(player, button) {
     if (button.text() !== '') {return}
     button.text(player.symbol);
@@ -28,7 +22,6 @@ TicTacToe.prototype = {
     var num = square[1];
 
     if (square === 'B2') {
-      player.center_sq = true;
     } else if (['A1', 'A3', 'C1', 'C3'].includes(square)) {
       player.corners.push(square);
     }
@@ -58,8 +51,6 @@ TicTacToe.prototype = {
   },
 
   won: function(player) {
-    // if letters are all the same, numbers are all the same, or letters & numbers different
-    // then the player wins (letters/numbers from data-cell attr in buttons)
     var num_keys = Object.keys(player.numbers);
     var letter_keys = Object.keys(player.letters);
 
@@ -77,9 +68,9 @@ TicTacToe.prototype = {
       }
     }
 
-    // if the player has all possible numbers and letters AND they claimed 
-    // the center square + 2 corners, they have a diagonal win
-    if (num_keys.length === 3 && letter_keys.length === 3 && player.center_sq === true) {
+    // if the player has something in all rows (letters) and columns (numbers) AND they claimed 
+    // opposite corners, they have a diagonal win
+    if (num_keys.length === 3 && letter_keys.length === 3) {
       if (containsAll(['A1', 'C3'], player.corners) || containsAll(['A3', 'C1'], player.corners)) {
         return true;
       }
