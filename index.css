@@ -15,14 +15,12 @@ h1 {
   text-align: center;
   font-variant: small-caps;
   font-size: 3rem;
-  /*color: #fff;*/
 }
 
 #tic-tac-toe {
   width: 390px;
   height: 390px;
   margin: 0 auto;
-  /*display: none;*/
 }
 
 .row {
@@ -64,7 +62,7 @@ button:focus {
 
 p {
   font-size: 3rem;
-  color: lime;
+  color: #fff;
   text-align: center;
   margin: 1rem 0;
 }
@@ -74,9 +72,9 @@ p.draw {
 }
 
 .reset, .reset-scores {
-  width: 20%;
+  width: 15%;
   font-size: 1.5rem;
-  margin: 1.5rem auto;
+  margin: 1.5rem auto 0 auto;
   display: block;
   border-radius: 12px;
   background-color: black;
@@ -85,7 +83,7 @@ p.draw {
 
 .reset-scores {
   color: rgb(241,90,0);
-  margin-top: 0;
+  margin-top: 0.8rem;
 }
 
 h2 {
@@ -111,5 +109,7 @@ h2 {
   font-size: 2.5rem;
 }
 
-
+.outcome {
+  margin-top: 1.5rem;
+}
 
