@@ -8,6 +8,14 @@
 
   <body>
     <h1>Tic-Tac-Tequila Sunrise</h1>
+    <div class="player-1-score">
+      <h2>🍹 score</h2>
+      <span class="score-1">0</span>
+    </div>
+    <div class="player-2-score">
+      <h2>🌶 score</h2>
+      <span class="score-2">0</span>
+    </div>
     <div id="tic-tac-toe">
       <div class="row">
         <div class="button"><button class="grid" data-cell="A1"></button></div>
@@ -25,7 +33,10 @@
         <div class="button"><button class="grid" data-cell="C3"></button></div>
       </div>
     </div>
-    <p><button class='reset'>Reset!</button></p>
+    <p>
+      <button class='reset'>New game!</button>
+      <button class='reset-scores'>Reset scores!</button>
+    </p>
     <p class="outcome"></p>
   </body>
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>

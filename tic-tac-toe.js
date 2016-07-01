@@ -79,7 +79,10 @@ TicTacToe.prototype = {
   check_winner: function(player) {
     if (this.won(player)) {
       $('.outcome').text(player.symbol + ' WINS!');
-      // $('.reset').css("display", "block");
+      var player_class = ".score-" + player.id;
+      var curr_score = $(player_class).text();
+      curr_score++;
+      $(player_class).text(curr_score);
     } else if (this.turn_counter === 9) {
       $('.outcome').text("IT'S A DRAW!");
       $('p').addClass('draw');
@@ -119,5 +122,10 @@ $(document).on('ready', function() {
     $('.grid').text('');
     $('.outcome').text('');
     ttt = new TicTacToe();
+  })
+  $('.reset-scores').on('click', function(event) {
+    event.preventDefault();
+    $('.score-1').text(0);
+    $('.score-2').text(0);
   })
 })
