@@ -74,7 +74,7 @@ TicTacToe.prototype = {
   check_winner: function(player) {
     if (this.won(player)) {
       $('p').text('PLAYER ' + player.id + ' WINS!');
-      $('.reset').css("display", "block");
+      // $('.reset').css("display", "block");
     } else if (this.turn_counter === 9) {
       $('p').text("IT'S A DRAW!");
       $('p').addClass('draw');
@@ -100,14 +100,17 @@ function containsAll(test_cases, corners){
 $(document).on('ready', function() {
   console.log('Welcome to Tic-Tac-Toe!');
   var ttt = new TicTacToe();
-  $('.play').on('click', function(event) {
-    ttt.show();
-  })
   $('.grid').on('click', function(event) {
     event.preventDefault();
     var button = $(this);
     ttt.play(ttt.turn, button);
     ttt.check_winner(ttt.turn);
     ttt.switch_turns(ttt.turn);
+  })
+  $('.reset').on('click', function(event) {
+    event.preventDefault();
+    $('.grid').text('');
+    $('p').text('');
+    ttt = new TicTacToe();
   })
 })
