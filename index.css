@@ -2,11 +2,16 @@ html {
   box-sizing: border-box;
 }
 
+h1 {
+  text-align: center;
+  font-variant: small-caps;
+}
+
 #tic-tac-toe {
   width: 450px;
   height: 450px;
   margin: 0 auto;
-  display: none;
+  /*display: none;*/
 }
 
 .row {
@@ -33,6 +38,26 @@ html {
 .play {
   width: 30%;
   font-size: 3rem;
-  margin: 0 auto;
+  margin: 20% auto;
   display: block;
+  border-radius: 12px;
+}
+
+p {
+  font-size: 3rem;
+  color: lime;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+p.draw {
+  color: orange;
+}
+
+.reset {
+  width: 30%;
+  font-size: 2rem;
+  margin: 0 auto;
+  display: none;
+  border-radius: 12px;
 }

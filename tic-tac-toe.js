@@ -3,70 +3,106 @@ function Player(id, sym) {
   this.symbol = sym;
   this.numbers = {};
   this.letters = {};
+  this.center_sq = false;
+  this.corners = [];
 }
 
 function TicTacToe() {
   this.player_one = new Player(1, '🌶');
   this.player_two = new Player(2, '🍹');
   this.turn = this.player_one;
+  this.turn_counter = 0;
 }
 
 TicTacToe.prototype = {
-  show: function() {
-    $("#tic-tac-toe").show();
-    $('.play').hide();
-  },
+  // show: function() {
+  //   $("#tic-tac-toe").show();
+  //   $('.play').hide();
+  // },
+
   play: function(player, button) {
     if (button.text() !== '') {return}
     button.text(player.symbol);
-    var letter = button.data('cell')[0];
-    var num = button.data('cell')[1];
+    var square = button.data('cell');
+    var letter = square[0];
+    var num = square[1];
 
-    this._inc_or_create_key(player.numbers, num);
-    this._inc_or_create_key(player.letters, letter);
+    if (square === 'B2') {
+      player.center_sq = true;
+    } else if (['A1', 'A3', 'C1', 'C3'].includes(square)) {
+      player.corners.push(square);
+    }
+
+    inc_or_create_key(player.numbers, num);
+    inc_or_create_key(player.letters, letter);
+    this.turn_counter++;
 
     if (this.won(player)) {
-      console.log('PLAYER ' + player.id + " WINS!");
-    } else if (player.id === 1) {
+      $('p').text('PLAYER ' + player.id + ' WINS!');
+      $('.reset').css("display", "block");
+    } else if (this.turn_counter === 9) {
+      $('p').text("IT'S A DRAW!");
+      $('p').addClass('draw');
+    } else {
+      this.switch_turns(player);
+    }
+  },
+
+  switch_turns: function(player) {
+    if (player.id === 1) {
       this.turn = this.player_two;
     } else {
       this.turn = this.player_one;
     }
+
   },
 
   won: function(player) {
     // if letters are all the same, numbers are all the same, or letters & numbers different
     // then the player wins (letters/numbers from data-cell attr in buttons)
-    var winner = false;
     var num_keys = Object.keys(player.numbers);
     var letter_keys = Object.keys(player.letters);
 
-    if (num_keys.length === 3 && letter_keys.length === 3) {
-      return true;
-    }
-
+    // if any of the number counts is 3, they have a vertical win
     for (var n_key of num_keys) {
       if (player.numbers[n_key] === 3) {
-        winner = true;
+        return true;
       } 
     }
 
+    // if any of the letter counts is 3, they have a horizontal win
     for (var l_key of letter_keys) {
       if (player.letters[l_key] === 3) {
-        winner = true;
+        return true;
       }
     }
 
-    return winner;
+    // if the player has all possible numbers and letters AND they claimed 
+    // the center square + 2 corners, they have a diagonal win
+    if (num_keys.length === 3 && letter_keys.length === 3 && player.center_sq === true) {
+      if (containsAll(['A1', 'C3'], player.corners) || containsAll(['A3', 'C1'], player.corners)) {
+        return true;
+      }
+    }
+
+    return false;
   }, 
 
-  _inc_or_create_key: function(obj, key) {
-    if (obj[key]) {
-      obj[key]++;
-    } else {
-      obj[key] = 1;
-    }
+}
+
+function inc_or_create_key(obj, key) {
+  if (obj[key]) {
+    obj[key]++;
+  } else {
+    obj[key] = 1;
   }
+}
+
+function containsAll(test_cases, corners){ 
+  for(var i = 0 , len = test_cases.length; i < len; i++){
+     if($.inArray(test_cases[i], corners) == -1) return false;
+  }
+  return true;
 }
 
 $(document).on('ready', function() {
