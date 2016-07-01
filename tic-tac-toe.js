@@ -17,7 +17,7 @@ function TicTacToe() {
 
 TicTacToe.prototype = {
   play: function(player, button) {
-    if (button.text() !== '' || this.game_over === true) {return false}
+    if (button.text() !== '' || this.game_over === true) {return false;}
     button.text(player.symbol);
     var square = button.data('cell');
     var letter = square[0];
@@ -41,7 +41,6 @@ TicTacToe.prototype = {
     } else {
       this.turn = this.player_one;
     }
-
   },
 
   won: function(player) {
@@ -65,7 +64,7 @@ TicTacToe.prototype = {
     }
 
     // if the player has something in all rows (letters) and columns (numbers) AND they claimed 
-    // opposite corners, they have a diagonal win
+    // the center square & opposite corners, they have a diagonal win
     if (num_keys.length === 3 && letter_keys.length === 3 && player.center_sq === true) {
       if (containsAll(['A1', 'C3'], player.corners) || containsAll(['A3', 'C1'], player.corners)) {
         this.game_over = true;
