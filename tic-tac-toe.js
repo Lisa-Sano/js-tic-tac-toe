@@ -78,8 +78,6 @@ TicTacToe.prototype = {
     } else if (this.turn_counter === 9) {
       $('p').text("IT'S A DRAW!");
       $('p').addClass('draw');
-    } else {
-      this.switch_turns(player);
     }
   }
 }
@@ -110,5 +108,6 @@ $(document).on('ready', function() {
     var button = $(this);
     ttt.play(ttt.turn, button);
     ttt.check_winner(ttt.turn);
+    ttt.switch_turns(ttt.turn);
   })
 })
