@@ -4,6 +4,7 @@ function Player(id, sym) {
   this.numbers = {};
   this.letters = {};
   this.corners = [];
+  this.center_sq = false;
 }
 
 function TicTacToe() {
@@ -22,6 +23,7 @@ TicTacToe.prototype = {
     var num = square[1];
 
     if (square === 'B2') {
+      player.center_sq = true;
     } else if (['A1', 'A3', 'C1', 'C3'].includes(square)) {
       player.corners.push(square);
     }
@@ -29,16 +31,6 @@ TicTacToe.prototype = {
     inc_or_create_key(player.numbers, num);
     inc_or_create_key(player.letters, letter);
     this.turn_counter++;
-
-    if (this.won(player)) {
-      $('p').text('PLAYER ' + player.id + ' WINS!');
-      $('.reset').css("display", "block");
-    } else if (this.turn_counter === 9) {
-      $('p').text("IT'S A DRAW!");
-      $('p').addClass('draw');
-    } else {
-      this.switch_turns(player);
-    }
   },
 
   switch_turns: function(player) {
@@ -70,13 +62,25 @@ TicTacToe.prototype = {
 
     // if the player has something in all rows (letters) and columns (numbers) AND they claimed 
     // opposite corners, they have a diagonal win
-    if (num_keys.length === 3 && letter_keys.length === 3) {
+    if (num_keys.length === 3 && letter_keys.length === 3 && player.center_sq === true) {
       if (containsAll(['A1', 'C3'], player.corners) || containsAll(['A3', 'C1'], player.corners)) {
         return true;
       }
     }
 
     return false;
+  },
+
+  check_winner: function(player) {
+    if (this.won(player)) {
+      $('p').text('PLAYER ' + player.id + ' WINS!');
+      $('.reset').css("display", "block");
+    } else if (this.turn_counter === 9) {
+      $('p').text("IT'S A DRAW!");
+      $('p').addClass('draw');
+    } else {
+      this.switch_turns(player);
+    }
   }
 }
 
@@ -105,5 +109,6 @@ $(document).on('ready', function() {
     event.preventDefault();
     var button = $(this);
     ttt.play(ttt.turn, button);
+    ttt.check_winner(ttt.turn);
   })
 })
