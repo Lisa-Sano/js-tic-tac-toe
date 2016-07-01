@@ -8,8 +8,8 @@ function Player(id, sym) {
 }
 
 function TicTacToe() {
-  this.player_one = new Player(1, '🌶');
-  this.player_two = new Player(2, '🍹');
+  this.player_one = new Player(1, '🍹');
+  this.player_two = new Player(2, '🌶');
   this.turn = this.player_one;
   this.turn_counter = 0;
   this.game_over = false;
@@ -117,7 +117,7 @@ $(document).on('ready', function() {
   $('.reset').on('click', function(event) {
     event.preventDefault();
     $('.grid').text('');
-    $('p').text('');
+    $('.outcome').text('');
     ttt = new TicTacToe();
   })
 })

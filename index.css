@@ -78,5 +78,5 @@ p.draw {
   display: block;
   border-radius: 12px;
   background-color: black;
-  color: #e60000;
+  color: rgb(255,201,0);
 }
