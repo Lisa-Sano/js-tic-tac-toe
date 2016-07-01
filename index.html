@@ -18,25 +18,24 @@
     </div>
     <div id="tic-tac-toe">
       <div class="row">
-        <div class="button"><button class="grid" data-cell="A1"></button></div>
-        <div class="button"><button class="grid" data-cell="A2"></button></div>
-        <div class="button"><button class="grid" data-cell="A3"></button></div>
+        <div class="button-div"><button class="grid top left" data-cell="A1"></button></div>
+        <div class="button-div"><button class="grid top" data-cell="A2"></button></div>
+        <div class="button-div"><button class="grid top right" data-cell="A3"></button></div>
       </div>
       <div class="row">
-        <div class="button"><button class="grid" data-cell="B1"></button></div>
-        <div class="button"><button class="grid" data-cell="B2"></button></div>
-        <div class="button"><button class="grid" data-cell="B3"></button></div>
+        <div class="button-div"><button class="grid left" data-cell="B1"></button></div>
+        <div class="button-div"><button class="grid" data-cell="B2"></button></div>
+        <div class="button-div"><button class="grid right" data-cell="B3"></button></div>
       </div>
       <div class="row">
-        <div class="button"><button class="grid" data-cell="C1"></button></div>
-        <div class="button"><button class="grid" data-cell="C2"></button></div>
-        <div class="button"><button class="grid" data-cell="C3"></button></div>
+        <div class="button-div"><button class="grid bottom left" data-cell="C1"></button></div>
+        <div class="button-div"><button class="grid bottom" data-cell="C2"></button></div>
+        <div class="button-div"><button class="grid bottom right" data-cell="C3"></button></div>
       </div>
     </div>
-    <p>
-      <button class='reset'>New game!</button>
-      <button class='reset-scores'>Reset scores!</button>
-    </p>
+    <p class="the-line"></p>
+    <button class='reset'>New game!</button>
+    <button class='reset-scores'>Reset scores!</button>
     <p class="outcome"></p>
   </body>
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>

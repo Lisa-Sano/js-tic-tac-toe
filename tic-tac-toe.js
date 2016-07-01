@@ -104,9 +104,17 @@ function containsAll(test_cases, corners){
   return true;
 }
 
+function reset_grid() {
+  $('.grid').text('');
+  $('.outcome').text('');
+}
+
 $(document).on('ready', function() {
-  console.log('Welcome to Tic-Tac-Toe!');
+  // adjust height of board so width is 40% and height matches
   var ttt = new TicTacToe();
+  var cw = $('.button-div').width();
+  $('.button-div').css({'height':cw+'px'});
+
   $('.grid').on('click', function(event) {
     event.preventDefault();
     var button = $(this);
@@ -118,13 +126,14 @@ $(document).on('ready', function() {
   })
   $('.reset').on('click', function(event) {
     event.preventDefault();
-    $('.grid').text('');
-    $('.outcome').text('');
+    reset_grid();
     ttt = new TicTacToe();
   })
   $('.reset-scores').on('click', function(event) {
     event.preventDefault();
     $('.score-1').text(0);
     $('.score-2').text(0);
+    reset_grid();
+    ttt = new TicTacToe();
   })
 })
